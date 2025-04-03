@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, Search, MessageCircle } from 'lucide-react';
 import Navbar from '../components/Navbar';
@@ -115,48 +114,49 @@ const FAQ = () => {
         </AnimatedSection>
         
         <AnimatedSection delay={0.1}>
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
-            <div className="relative flex-grow">
-              <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-400" />
-              </div>
-              <input
-                type="text"
-                placeholder="Search questions..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-3 w-full rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-loan-primary"
-              />
+             <div className="flex flex-col md:flex-row gap-4 mb-8">
+              <div className="relative flex-grow">
+            <div  className="absolute inset-y-0 left-3 flex items-center pointer-events-none"  style={{ top: "50%", transform: "translateY(-50%)" }} >
+        <Search className="h-5 w-5 text-gray-400" />
+      </div>
+      <input
+        type="text"
+        placeholder="Search questions..." value={searchQuery}
+                 onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 pr-4 py-3 w-full rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-loan-primary" />
             </div>
+           </div>
+            </AnimatedSection>
+
             
-            <div className="flex flex-wrap gap-2">
-              <button 
-                onClick={() => setActiveCategory(null)}
+        <div>
+          <div className="flex flex-wrap gap-2">
+            <button 
+              onClick={() => setActiveCategory(null)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                activeCategory === null
+                  ? 'bg-loan-primary text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              All
+            </button>
+            
+            {categories.map(category => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  activeCategory === null
+                  activeCategory === category
                     ? 'bg-loan-primary text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                All
+                {category}
               </button>
-              
-              {categories.map(category => (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    activeCategory === category
-                      ? 'bg-loan-primary text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
+            ))}
           </div>
-        </AnimatedSection>
+        </div>
         
         <div className="space-y-4">
           {filteredFaqs.length > 0 ? (
